@@ -61,6 +61,7 @@ EMAIL_HOST_PASSWORD = 'jcjk lhkc febe wghk'  # Use environment variables for pro
 # Middleware and CSRF settings
 MIDDLEWARE = [
     'django.middleware.security.SecurityMiddleware',
+    "corsheaders.middleware.CorsMiddleware",
     'django.contrib.sessions.middleware.SessionMiddleware',
     'django.middleware.common.CommonMiddleware',
     'django.middleware.csrf.CsrfViewMiddleware',
