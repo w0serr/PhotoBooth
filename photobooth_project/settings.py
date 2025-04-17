@@ -38,6 +38,8 @@ INSTALLED_APPS = [
     'django.contrib.messages',
     'django.contrib.staticfiles',
     'photobooth.apps.PhotoboothConfig',
+
+    "corsheaders",
 ]
 
 LOGIN_URL = '/login/'
