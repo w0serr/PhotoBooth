@@ -1,0 +1,54 @@
+{% extends 'photobooth/base.html' %}
+
+{% load static %}
+
+{% block title %}О компании{% endblock %}
+
+{% block content %}
+        <section class="cta">
+            <div class="cta-image">
+                <img src="{% static 'images/photo_2025-03-20_00-27-47.jpg' %}" alt="Гости с распечатанными фотографиями" class="about-img">
+            </div>
+            <div class="cta-text">
+                <h1>Мы — команда профессионалов</h1>
+                <div class="event-types">
+                    <div class="event-type">3000+ счастливых гостей</div>
+                    <div class="event-type">200+ мероприятий</div>
+                    <div class="event-type">100+ довольных клиентов</div>
+                </div>
+                <p>С 2022 года мы предоставляем в аренду фотобудки по всей Чите и Забайкальскому краю. Мы создаём не просто фотографии, а настоящие эмоции и весёлые воспоминания, которые остаются с нашими клиентами на всю жизнь.</p>
+                <p>Наша фотобудка — это не просто аппарат. Это современное оборудование с моментальной печатью, персонализированными шаблонами и цифровой доставкой снимков. Мы уделяем внимание каждой детали, чтобы вы наслаждались процессом.</p>
+            </div>
+        </section>
+
+            <section class="advantages">
+                <h2 class="advantages-title">Наши преимущества</h2>
+                <div class="advantage-list">
+                    <div class="advantage">
+                        <div class="advantage-number">200+</div>
+                        <h3>Мероприятий проведено</h3>
+                    </div>
+                    <div class="advantage">
+                        <div class="advantage-number">100%</div>
+                        <h3>Довольных клиентов</h3>
+                    </div>
+                    <div class="advantage">
+                        <div class="advantage-number">3+</div>
+                        <h3>Года опыта проведения</h3>
+                    </div>
+                </div>
+            </section>
+
+            <section class="advantages">
+                <div class="advantage-list">
+                    <div class="advantage">
+                        <h3>Мы верим, что каждая мелочь имеет значение</h3>
+                        <p>Именно поэтому мы приезжаем заранее и устанавливаем всё без спешки</p>
+                        <p>Помогаем гостям делать снимки и печатать фото</p>
+                        <p>Предоставляем яркие аксессуары и фоны</p>
+                        <p>Работаем с дизайном рамок индивидуально под событие</p>
+                        <p>Благодаря нам, вы получите не просто фото, а целую стену воспоминаний, которыми можно гордиться. Мы делаем ваше мероприятие ярким, душевным и запоминающимся.</p>
+                    </div>
+                </div>
+            </section>
+{% endblock %}

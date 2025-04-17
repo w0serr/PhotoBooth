@@ -1,0 +1,21 @@
+{% extends 'photobooth/base.html' %}
+
+{% block title %}Контакты{% endblock %}
+
+{% block content %}
+<section class="contacts-section">
+        <h1 class="contacts-title">Контакты</h1>
+        <p class="contacts-subtitle">Если у вас есть вопросы, не стесняйтесь обращаться к нам!</p>
+
+        <div class="contact-info">
+            <p>+7 924 372-54-49</p>
+            <p><a href="mailto:support@photobooth.com">support@photobooth.com</a></p>
+            <p>г. Чита, Красноармейская улица, 69</p>
+        </div>
+
+        <div class="map-container">
+            <iframe src="https://yandex.ru/map-widget/v1/?ll=113.500847%2C52.050663&z=16&pt=113.500847,52.050663,pm2rdl"
+                    width="100%" height="400" frameborder="0" allowfullscreen style="border-radius: 10px;"></iframe>
+        </div>
+</section>
+{% endblock %}

@@ -1,0 +1,33 @@
+{% extends 'photobooth/base.html' %}
+
+{% block title %}Регистрация{% endblock %}
+
+{% block content %}
+<section class="register">
+    <div class="register-container">
+        <div class="register-box">
+            <h2>Регистрация</h2>
+            <form method="post">
+                {% csrf_token %}
+
+                <div class="input-container">
+                    <div>
+                        <input type="text" name="username" id="{{ form.username.id_for_label }}" placeholder="Имя пользователя" value="{{ form.username.value|default_if_none:'' }}" class="input-field">
+                    </div>
+                    <div>
+                        <input type="email" name="email" id="{{ form.email.id_for_label }}" placeholder="Электронная почта" value="{{ form.email.value|default_if_none:'' }}" class="input-field">
+                    </div>
+                    <div>
+                        <input type="password" name="password1" id="{{ form.password1.id_for_label }}" placeholder="Пароль" value="{{ form.password1.value|default_if_none:'' }}" class="input-field">
+                    </div>
+                    <div>
+                        <input type="password" name="password2" id="{{ form.password2.id_for_label }}" placeholder="Подтверждение пароля" value="{{ form.password2.value|default_if_none:'' }}" class="input-field">
+                    </div>
+                </div>
+
+                <button type="submit" class="btn-primary">Зарегистрироваться</button>
+            </form>
+        </div>
+    </div>
+</section>
+{% endblock %}

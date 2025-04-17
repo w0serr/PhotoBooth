@@ -1,0 +1,50 @@
+{% extends 'photobooth/base.html' %}
+
+{% block title %}Список заявок{% endblock %}
+
+{% block content %}
+<section class="request-list-section">
+    <h1>{% if user.is_superuser %}Новые заявки{% else %}Мои заявки{% endif %}</h1>
+
+
+    {% if user.is_superuser %}
+        <form method="get" class="filter-form">
+            <select name="status">
+                <option value="">Все</option>
+                <option value="new">Новые</option>
+                <option value="in_progress">В процессе</option>
+                <option value="completed">Завершенные</option>
+            </select>
+            <button type="submit">Фильтровать</button>
+        </form>
+    {% endif %}
+
+    <ul class="request-item-list">
+        {% for request in object_list %}
+            <li class="request-item">
+                <a href="{% url 'request_detail' request.id %}">{{ request.description }}</a>
+                <span>({{ request.get_status_display }})</span>
+
+                {% if user.is_superuser %}
+                    <form method="post" action="{% url 'change_status' request.id %}" class="status-form">
+                        {% csrf_token %}
+                        <select name="status" class="status-select" onchange="this.form.submit()">
+                            <option value="new" {% if request.status == 'new' %}selected{% endif %}>Новый</option>
+                            <option value="in_progress" {% if request.status == 'in_progress' %}selected{% endif %}>В процессе</option>
+                            <option value="completed" {% if request.status == 'completed' %}selected{% endif %}>Завершенный</option>
+                        </select>
+                    </form>
+
+                    <form method="post" action="{% url 'delete_request' request.id %}" style="display:inline;">
+                        {% csrf_token %}
+                        <button type="submit" class="btn btn-danger">Удалить</button>
+                    </form>
+                {% endif %}
+            </li>
+        {% endfor %}
+
+    </ul>
+
+    <a href="{% url 'request_create' %}" class="new-request-btn">Создать новую заявку</a>
+</section>
+{% endblock %}

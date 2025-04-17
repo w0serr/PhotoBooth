@@ -1,0 +1,268 @@
+{% extends 'photobooth/base.html' %}
+
+{% load static %}
+
+{% block title %}Главная{% endblock %}
+
+{% block content %}
+    <div class="content">
+        <!-- Первый экран с фотографией и призывом к действию -->
+        <section class="cta">
+            <div class="cta-image">
+                <img src="{% static 'images/photo_2025-03-20_00-27-42.jpg' %}" alt="Выездная фотобудка" class="cta-img">
+            </div>
+            <div class="cta-text">
+                <h1>Выездная фотобудка <br> в аренду на любое мерояприятие</h1>
+                <div class="event-types">
+                    <div class="event-type">Частное</div>
+                    <div class="event-type">Коммерческое</div>
+                </div>
+                <p>День рождения, свадьба, девичник, корпоратив, тимбилдинг… на любом мероприятии фотобудка станет отличным дополнением к развлекательной программе</p>
+                <a href="{% url 'request_create' %}" class="btn">Заказать сейчас</a>
+            </div>
+        </section>
+
+        <section class="logos">
+            <div class="logo-carousel-container">
+                <div class="logo-carousel">
+                    <div class="logo-item"><img src="{% static 'images/logo-sber.png' %}" alt="Сбер"></div>
+                    <div class="logo-item"><img src="{% static 'images/logo-alpha.png' %}" alt="Альфа Банк"></div>
+                    <div class="logo-item"><img src="{% static 'images/logo-rostelecom.png' %}" alt="Ростелеком"></div>
+                    <div class="logo-item"><img src="{% static 'images/logo-tbank.png' %}" alt="Тбанк"></div>
+                    <div class="logo-item"><img src="{% static 'images/logo-ewa.png' %}" alt="EWA product"></div>
+                    <div class="logo-item"><img src="{% static 'images/logo-vtb.png' %}" alt="ВТБ"></div>
+                    <div class="logo-item"><img src="{% static 'images/logo-rzd.png' %}" alt="РЖД"></div>
+                    <!-- Дублируем для плавности анимации -->
+                    <div class="logo-item"><img src="{% static 'images/logo-sber.png' %}" alt="Сбер"></div>
+                    <div class="logo-item"><img src="{% static 'images/logo-alpha.png' %}" alt="Альфа Банк"></div>
+                    <div class="logo-item"><img src="{% static 'images/logo-rostelecom.png' %}" alt="Ростелеком"></div>
+                    <div class="logo-item"><img src="{% static 'images/logo-tbank.png' %}" alt="Тбанк"></div>
+                    <div class="logo-item"><img src="{% static 'images/logo-ewa.png' %}" alt="EWA product"></div>
+                    <div class="logo-item"><img src="{% static 'images/logo-vtb.png' %}" alt="ВТБ"></div>
+                    <div class="logo-item"><img src="{% static 'images/logo-rzd.png' %}" alt="РЖД"></div>
+                </div>
+            </div>
+        </section>
+
+        <section class="advantages">
+            <h2 class="advantages-title">Наши преимущества</h2>
+            <div class="advantage-list">
+                <div class="advantage">
+                    <div class="advantage-number">1</div>
+                    <h3>Качество</h3>
+                    <p>Профессиональное оборудование и опытная команда</p>
+                </div>
+                <div class="advantage">
+                    <div class="advantage-number">2</div>
+                    <h3>Гибкость</h3>
+                    <p>Мы подстраиваемся под ваши запросы и идеи, независимо от масштаба события</p>
+                </div>
+                <div class="advantage">
+                    <div class="advantage-number">3</div>
+                    <h3>Доверие</h3>
+                    <p>Более 100 успешных мероприятий и множество довольных клиентов</p>
+                </div>
+            </div>
+        </section>
+
+        <section class="cta cta-highlight cta-overlay">
+            <div class="cta-image">
+                <img src="{% static 'images/photo_2025-03-20_00-27-47.jpg' %}" alt="Фотобудка на мероприятии" class="cta-img">
+            </div>
+            <div class="cta-text">
+                <h1>Яркий акцент<br>вашего праздника</h1>
+                <p>Фотобудка подарит гостям море эмоций и весёлые снимки на память. Подходит для любого формата мероприятия</p>
+                <a href="{% url 'request_create' %}" class="btn">Забронировать</a>
+            </div>
+        </section>
+
+       <section class="pricing-section">
+            <h2>Стоимость аренды</h2>
+            <div class="pricing-cards">
+                {% for package in pricing_packages %}
+                    <div class="pricing-card">
+                        <h3>{{ package.name }}</h3>
+                        <p class="price">{{ package.price }} ₽ / {{ package.duration }}</p>
+                        <ul>
+                            {% for feature in package.features_list %}
+                                <li>{{ feature }}</li>
+                            {% endfor %}
+                        </ul>
+                        <a href="{% url 'request_create' %}" class="btn">{{ package.price }} ₽</a>
+                    </div>
+                {% empty %}
+                    <p>Нет пакетов для отображения</p>
+                {% endfor %}
+            </div>
+        </section>
+
+
+
+        <section class="workflow">
+            <div class="workflow-header">
+                <h2 class="workflow-title">Как мы работаем</h2>
+                <div class="scroll-buttons">
+                    <button class="scroll-button arrow-left">
+                        <img src="{% static 'images/left-arrow-alt-svgrepo-com.svg' %}" alt="←">
+                    </button>
+                    <button class="scroll-button arrow-right">
+                        <img src="{% static 'images/left-arrow-alt-svgrepo-com.svg' %}" alt="→" class="rotate-180">
+                    </button>
+                </div>
+            </div>
+
+            <div class="workflow-steps-container">
+                <div class="workflow-steps">
+                    <div class="workflow-step">
+                        <h3>Вы оставляете заявку</h3>
+                        <p>Выбераете удобное время и предоставляете основную информацию о мероприятии</p>
+                    </div>
+                    <div class="workflow-step">
+                        <h3>Мы обсуждаем детали</h3>
+                        <p>Согласовываем ваши пожелания, обсуждаем идеи и требования</p>
+                    </div>
+                    <div class="workflow-step">
+                        <h3>Подготавливаем оборудование</h3>
+                        <p>Тщательно проверяем фотобудку и привозим её на место</p>
+                    </div>
+                    <div class="workflow-step">
+                        <h3>Проводим мероприятие</h3>
+                        <p>Обеспечиваем отличные фотографии и веселую атмосферу</p>
+                    </div>
+                    <div class="workflow-step">
+                        <h3>Передаем фотографии</h3>
+                        <p>Вручим готовые снимки или отправим их вам в электронном виде</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <section class="faq">
+        <div class="faq-left">
+            <h2>Часто задаваемые вопросы</h2>
+        </div>
+        <div class="faq-right">
+            <div class="faq-item">
+                <div class="faq-question">
+                    Сколько времени занимает установка фотобудки?
+                    <span class="arrow"><img src="{% static 'images/left-arrow-alt-svgrepo-com.svg' %}" alt="стрелка" class="rotate-90"></span>
+                </div>
+                <div class="faq-answer">
+                    Установка занимает в среднем 15–20 минут, в зависимости от условий площадки
+                </div>
+            </div>
+            <div class="faq-item">
+                <div class="faq-question">
+                    Нужен ли доступ к интернету?
+                    <span class="arrow"><img src="{% static 'images/left-arrow-alt-svgrepo-com.svg' %}" alt="стрелка" class="rotate-90"></span>
+                </div>
+                <div class="faq-answer">
+                    Нет, фотобудка работает автономно
+                </div>
+            </div>
+            <div class="faq-item">
+                <div class="faq-question">
+                    Можно ли брендировать фотобудку под мероприятие?
+                    <span class="arrow"><img src="{% static 'images/left-arrow-alt-svgrepo-com.svg' %}" alt="стрелка" class="rotate-90"></span>
+                </div>
+                <div class="faq-answer">
+                    Да, мы предлагаем услуги по брендированию как внешнего вида будки, так и макетов фото
+                </div>
+            </div>
+            <div class="faq-item">
+                <div class="faq-question">
+                    Сколько фотографий можно сделать за мероприятие?
+                    <span class="arrow"><img src="{% static 'images/left-arrow-alt-svgrepo-com.svg' %}" alt="стрелка" class="rotate-90"></span>
+                </div>
+                <div class="faq-answer">
+                    Количество фото не ограничено — гости могут фотографироваться сколько угодно в течение аренды
+                </div>
+            </div>
+            <div class="faq-item">
+                <div class="faq-question">
+                    Кто управляет фотобудкой во время мероприятия?
+                    <span class="arrow"><img src="{% static 'images/left-arrow-alt-svgrepo-com.svg' %}" alt="стрелка" class="rotate-90"></span>
+                </div>
+                <div class="faq-answer">
+                    На месте всегда присутствует наш оператор, который помогает гостям и следит за работой оборудования
+                </div>
+            </div>
+        </div>
+    </section>
+
+    </div>
+
+
+    <script>
+    document.addEventListener('DOMContentLoaded', function () {
+        let currentScrollIndex = 0;
+
+        // Получаем ссылки на кнопки
+        const leftButton = document.querySelector('.arrow-left');
+        const rightButton = document.querySelector('.arrow-right');
+        const steps = document.querySelector('.workflow-steps');
+        const stepWidth = document.querySelector('.workflow-step').offsetWidth + 30; // Ширина блока + отступ
+        const totalSteps = steps.children.length;
+
+        // Получаем все плашки
+        const workflowSteps = document.querySelectorAll('.workflow-step');
+
+        // Дублируем блоки для бесконечной прокрутки
+        function duplicateSteps() {
+            const firstStep = steps.children[0].cloneNode(true);
+            const lastStep = steps.children[steps.children.length - 1].cloneNode(true);
+
+            steps.appendChild(firstStep);
+            steps.insertBefore(lastStep, steps.children[0]);
+        }
+
+        // Функция обновления активной плашки
+        function updateActiveStep() {
+            workflowSteps.forEach((step, index) => {
+                if (index === currentScrollIndex) {
+                    step.classList.add('active');
+                } else {
+                    step.classList.remove('active');
+                }
+            });
+        }
+
+        // Функция прокрутки вправо (по кругу)
+        function scrollRight() {
+            currentScrollIndex = (currentScrollIndex + 1) % totalSteps; // Круговой сдвиг
+            steps.style.transform = `translateX(-${currentScrollIndex * stepWidth}px)`;
+            updateActiveStep();  // Обновляем активную плашку
+        }
+
+        // Функция прокрутки влево (по кругу)
+        function scrollLeft() {
+            currentScrollIndex = (currentScrollIndex - 1 + totalSteps) % totalSteps; // Круговой сдвиг
+            steps.style.transform = `translateX(-${currentScrollIndex * stepWidth}px)`;
+            updateActiveStep();  // Обновляем активную плашку
+        }
+
+        // Автоматическая прокрутка с заданным интервалом (например, каждые 3 секунды)
+        setInterval(scrollRight, 3000); // Прокрутка будет происходить каждые 3 секунды
+
+        // Привязываем обработчики событий к кнопкам
+        leftButton.addEventListener('click', scrollLeft);
+        rightButton.addEventListener('click', scrollRight);
+
+        // Дублируем элементы перед первой прокруткой
+        duplicateSteps();
+
+        // Изначально устанавливаем первую плашку как активную
+        updateActiveStep();
+    });
+
+    </script>
+
+    <script>
+    document.querySelectorAll('.faq-item').forEach(item => {
+        item.addEventListener('click', () => {
+            item.classList.toggle('active');
+        });
+    });
+    </script>
+
+{% endblock %}

@@ -1,0 +1,1306 @@
+
+body {
+    overflow: scroll; /* Оставляем возможность прокрутки */
+}
+
+::-webkit-scrollbar {
+    display: none; /* Скрываем полосы прокрутки в браузерах Webkit (Chrome, Safari, и т.д.) */
+}
+
+html {
+    scroll-behavior: smooth;
+}
+
+body {
+    font-family: 'Manrope', sans-serif;
+    margin: 0;
+    padding: 120px 0 0 0;
+    line-height: 1.6;
+    background-color: #0b0a0a;
+    color: #e0e0e0;
+}
+
+.content {
+    max-width: 1600px; /* Ограничение ширины */
+    margin: 0 auto; /* Центрирование контента */
+    padding: 0 15px; /* Добавление небольших отступов по бокам */
+}
+
+header {
+    background: rgba(51, 51, 51, 0.2);
+    color: #fff;
+    padding: 20px 30px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    border-radius: 15px; /* Закругленные углы */
+    position: fixed; /* Закрепление хедера */
+    top: 0; /* Закрепляем хедер у верхней части страницы */
+    left: 50%; /* Смещаем хедер на 50% от левой части */
+    transform: translateX(-50%); /* Центрируем хедер по горизонтали */
+    width: 1570px; /* Ширина хедера 1600px */
+    z-index: 1000; /* Убедитесь, что хедер находится поверх остальных элементов */
+    backdrop-filter: blur(30px); /* Размытие фона под хедером */
+    transition: background 0.3s ease; /* Плавный переход для фона при изменении */
+    margin: 20px 0 0 0;
+}
+
+header .logo a {
+    font-size: 30px;
+    font-weight: bold;
+    font-family: 'Bebas Neue', sans-serif;
+    color: #fff;
+    text-decoration: none;
+    letter-spacing: -0.7px;
+}
+
+header nav {
+    display: flex;
+    gap: 2rem;
+    justify-content: center;
+    flex-grow: 1;
+}
+
+header nav a {
+    color: #e0e0e0;
+    text-decoration: none;
+    font-size: 18px;
+    letter-spacing: 0.5px;
+}
+
+header nav a:hover {
+    color: #de6d38;
+}
+
+header .login-btn {
+    background: #de6d38;
+    color: #fff;
+    padding: 0.8rem 1.6rem;
+    text-decoration: none;
+    border-radius: 10px;
+    font-size: 1rem;
+    transition: background-color 0.3s ease, transform 0.2s ease;
+}
+
+header .login-btn:hover {
+    background: #b6542c;
+    transform: scale(1.05);
+}
+
+.auth-links {
+    display: flex;
+    gap: 20px; /* Расстояние между кнопками */
+    align-items: center; /* Центрирование кнопок по вертикали */
+}
+
+footer {
+    background: #0b0a0a;
+    color: #e0e0e0;
+    text-align: center;
+    padding: 80px 0 40px 0;
+    position: relative;
+    width: 100%;
+}
+
+footer p {
+    font-size: 0.9rem;
+}
+
+section {
+    padding: 10px 0;
+}
+
+.btn {
+    display: inline-block;
+    padding: 1.2rem 2.4rem; /* Увеличенные отступы */
+    background: linear-gradient(30deg, #de6d38, #c98c60);
+    background-size: 200% 200%;
+    color: #fff;
+    text-decoration: none;
+    border-radius: 12px;
+    font-size: 1.25rem; /* Увеличенный размер шрифта */
+    transition: background-position 0.5s ease, transform 0.2s ease;
+}
+
+.btn:hover {
+    background-position: 100% 100%;
+    transform: scale(1.04); /* Чуть сильнее увеличивается при наведении */
+}
+
+.auth-links .btn {
+    background: linear-gradient(30deg, #de6d38, #c98c60);
+    background-size: 200% 200%; /* Увеличиваем размер градиента */
+    color: #fff;
+    padding: 0.8rem 1.6rem;
+    text-decoration: none;
+    border-radius: 10px;
+    font-size: 1rem;
+    transition: background-position 0.5s ease, transform 0.2s ease;
+}
+
+.auth-links .btn:hover {
+    background-position: 100% 100%; /* Меняем положение градиента при наведении */
+    transform: scale(1.05);
+}
+
+header .login-btn,
+header .profile-btn,
+header .register-btn,
+header .logout-btn {
+    background: linear-gradient(30deg, #de6d38, #c98c60);
+    background-size: 200% 200%; /* Увеличиваем размер градиента */
+    color: #fff;
+    padding: 0.8rem 1.6rem;
+    text-decoration: none;
+    border-radius: 10px;
+    font-size: 1rem;
+    transition: background-position 0.5s ease, transform 0.2s ease;
+}
+
+header .login-btn:hover,
+header .profile-btn:hover,
+header .register-btn:hover,
+header .logout-btn:hover {
+    background-position: 100% 100%; /* Меняем положение градиента при наведении */
+    transform: scale(1.05);
+}
+
+
+/* Общий стиль для раздела */
+.advantages {
+    text-align: center;
+    margin: 0 0;
+}
+
+/* Заголовок раздела с шрифтом Bebas Neue */
+.advantages-title {
+    font-family: 'Bebas Neue', sans-serif;
+    font-size: 80px;
+    margin: 0 0 30px;
+}
+
+/* Список преимуществ с выравниванием по линии */
+.advantage-list {
+    display: flex;
+    justify-content: space-between; /* Расстояние между плашками */
+    gap: 30px; /* Расстояние между плашками */
+    width: 100%; /* Заполняем всю ширину */
+    max-width: 100%; /* Убираем ограничение по ширине */
+    margin: 0 auto; /* Центрируем контейнер */
+}
+
+/* Каждая плашка */
+.advantage {
+    background-color: rgba(255, 255, 255, 0.03); /* Полупрозрачная плашка */
+    padding: 40px; /* Увеличиваем отступы */
+    border-radius: 15px;
+    text-align: left;
+    display: flex;
+    flex-direction: column; /* Ставим элементы в колонку */
+    align-items: flex-start; /* Выровняем элементы слева */
+    justify-content: space-between; /* Местоположение элементов */
+    flex: 1; /* Плашки растягиваются на всю доступную ширину */
+    min-width: 0; /* Для предотвращения сжатия плашек */
+    transition: transform 0.3s ease, border 0.3s ease; /* Плавная анимация */
+    border: 2px solid transparent;
+}
+
+/* Оранжевая цифра */
+.advantage-number {
+    font-family: 'Bebas Neue', sans-serif;
+    color: #de6d38;
+    font-size: 100px; /* Увеличиваем размер цифры */
+    font-weight: bold;
+}
+
+/* Заголовок в плашке */
+.advantage h3 {
+    font-family: 'Bebas Neue', sans-serif;
+    font-size: 50px; /* Увеличиваем размер заголовка */
+    margin: 0;
+}
+
+/* Текст в плашке */
+.advantage p {
+    font-size: 20px; /* Увеличиваем размер текста */
+    margin-top: auto; /* Расстояние до конца плашки */
+}
+
+/* Эффект поднятия и обводки при наведении */
+.advantage:hover {
+    transform: translateY(-10px); /* Поднимаем плашку вверх */
+    border: 2px solid #de6d38;
+}
+
+
+.card {
+    padding: 2rem;
+    border: 1px solid #444;
+    border-radius: 12px;
+    background-color: #333;
+    box-shadow: 0 6px 12px rgba(0, 0, 0, 0.2);
+    transition: transform 0.2s ease, box-shadow 0.3s ease;
+}
+
+.card:hover {
+    transform: translateY(-10px);
+    box-shadow: 0 8px 16px rgba(0, 0, 0, 0.3);
+}
+
+.card h3 {
+    font-size: 1.8rem;
+    font-family: 'Bebas Neue', sans-serif;
+    color: #fff;
+    margin-bottom: 1rem;
+}
+
+.card p {
+    color: #bbb;
+}
+
+.cta {
+    display: flex;
+    justify-content: flex-start;
+    padding: 2rem 2rem;
+    background-color: #0b0a0a;
+    color: #e0e0e0;
+    align-items: center;
+    gap: 60px;
+}
+
+.cta-text h1 {
+    font-size: 100px;
+    font-family: 'Bebas Neue', sans-serif;
+    font-weight: bold;
+    margin: 40px 0 20px 0;
+    line-height: 100px;
+}
+
+.cta-text p {
+    font-size: 20px;
+    margin-bottom: 40px;
+}
+
+.event-type {
+    background-color: rgba(255, 255, 255, 0.03);
+    color: #bbb; /* Серый текст */
+    padding: 0.5rem 1rem; /* Уменьшенные отступы */
+    border-radius: 50px; /* Закругленные края */
+    font-size: 18px; /* Меньший размер шрифта */
+    text-align: center;
+    border: 1px solid transparent; /* Легкий контур для акцента */
+    display: inline-block; /* Упрощает управление размером */
+    margin-bottom: 10px;
+    margin-right: 10px;
+    transition: transform 0.3s ease, border 0.3s ease;
+}
+
+.event-type:hover {
+    transform: translateY(-5px); /* Поднимаем плашку вверх */
+    border: 1px solid #de6d38;
+}
+
+.cta-image {
+    flex: 0 1 70%; /* Уменьшаем максимальную ширину изображения */
+    max-width: 90%; /* Размер изображения */
+    border-radius: 30px; /* Закругленные края */
+    overflow: hidden; /* Чтобы изображение не выходило за рамки */
+}
+
+.cta-img {
+    width: 100%;
+    height: auto;
+    object-fit: cover; /* Удерживаем пропорции изображения */
+    border-radius: inherit; /* Наследуем закругление от контейнера */
+}
+
+
+/* Контейнер для страницы входа */
+.login-container {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 800px;
+    background-color: transparent;
+}
+
+/* Стиль для самой формы входа */
+.login-box {
+    background: rgba(51, 51, 51, 0.2);
+    padding: 2rem 3rem;
+    border-radius: 12px;
+    width: 100%;
+    max-width: 400px; /* Ограничиваем максимальную ширину формы */
+    color: #e0e0e0;
+    text-align: center;
+    overflow: hidden; /* Убираем вылазящие плашки */
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+}
+
+/* Заголовок */
+.login-box h2 {
+    font-size: 60px;  /* Увеличиваем размер заголовка */
+    margin: 20px;
+    color: #fff;  /* Белый цвет для заголовка */
+    font-family: 'Bebas Neue', sans-serif;
+}
+
+/* Контейнер для инпутов */
+.input-container {
+    display: flex;
+    flex-direction: column;
+    gap: 1rem;  /* Отступы между инпутами */
+    align-items: stretch; /* Растягиваем инпуты на всю ширину */
+    margin: 0 0 40px 0;
+    width: 100%;  /* Устанавливаем ширину контейнера 100% */
+}
+
+/* Стиль для инпутов */
+.input-container input {
+    width: 100%;  /* Устанавливаем инпуты на всю ширину контейнера */
+    padding: 0.8rem 1.6rem;
+    background: rgba(51, 51, 51, 0.2);
+    color: #e0e0e0;
+    border: 1px solid #252525;
+    border-radius: 10px;
+    font-size: 1rem;
+    box-sizing: border-box;  /* Чтобы отступы не выходили за рамки */
+}
+
+/* Стиль для инпутов при фокусе */
+.input-container input:focus {
+    outline: none;
+    border-color: #de6d38;  /* Оранжевая рамка при фокусе */
+}
+
+/* Стиль для кнопки входа */
+.btn-primary {
+    display: inline-block;
+    width: 100%;  /* Кнопка будет занимать всю ширину контейнера */
+    padding: 0.8rem 1.6rem;
+    background: linear-gradient(45deg, #de6d38, #c98c60); /* Градиент для кнопки */
+    color: #fff;
+    text-decoration: none;
+    border-radius: 10px;
+    font-size: 1rem;
+    margin: 0 0 20px 0;
+    transition: background 0.3s ease, transform 0.2s ease;
+    border: none; /* Убираем стандартную рамку у кнопки */
+    box-sizing: border-box;  /* Чтобы отступы не выходили за рамки */
+}
+
+.btn-primary:hover {
+    background: linear-gradient(45deg, #c98c60, #de6d38); /* Плавное движение градиента при наведении */
+    transform: scale(1.05);
+}
+
+/* Контейнер для страницы регистрации */
+.register-container {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 700px;
+    background-color: transparent;
+}
+
+/* Стиль для самой формы регистрации */
+.register-box {
+    background: rgba(51, 51, 51, 0.2);
+    padding: 2rem 3rem;
+    border-radius: 12px;
+    width: 100%;
+    max-width: 400px; /* Ограничиваем максимальную ширину формы */
+    color: #e0e0e0;
+    text-align: center;
+    overflow: hidden; /* Убираем вылазящие плашки */
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+}
+
+/* Заголовок */
+.register-box h2 {
+    font-size: 60px;  /* Увеличиваем размер заголовка */
+    margin: 20px;
+    color: #fff;  /* Белый цвет для заголовка */
+    font-family: 'Bebas Neue', sans-serif;
+}
+
+/* Контейнер для инпутов */
+.input-container {
+    display: flex;
+    flex-direction: column;
+    gap: 1rem;  /* Отступы между инпутами */
+    align-items: stretch; /* Растягиваем инпуты на всю ширину */
+    margin: 0 0 40px 0;
+    width: 100%;  /* Устанавливаем ширину контейнера 100% */
+}
+
+/* Стиль для инпутов */
+.input-container input {
+    width: 100%;  /* Устанавливаем инпуты на всю ширину контейнера */
+    padding: 0.8rem 1.6rem;
+    background: rgba(51, 51, 51, 0.2);
+    color: #e0e0e0;
+    border: 1px solid #252525;
+    border-radius: 10px;
+    font-size: 1rem;
+    box-sizing: border-box;  /* Чтобы отступы не выходили за рамки */
+}
+
+/* Стиль для инпутов при фокусе */
+.input-container input:focus {
+    outline: none;
+    border-color: #de6d38;  /* Оранжевая рамка при фокусе */
+}
+
+/* Стиль для кнопки регистрации */
+.btn-primary {
+    display: inline-block;
+    width: 100%;  /* Кнопка будет занимать всю ширину контейнера */
+    padding: 0.8rem 1.6rem;
+    background: linear-gradient(45deg, #de6d38, #c98c60); /* Градиент для кнопки */
+    color: #fff;
+    text-decoration: none;
+    border-radius: 10px;
+    font-size: 1rem;
+    transition: background 0.3s ease, transform 0.2s ease;
+    border: none; /* Убираем стандартную рамку у кнопки */
+    box-sizing: border-box;  /* Чтобы отступы не выходили за рамки */
+}
+
+.btn-primary:hover {
+    background: linear-gradient(45deg, #c98c60, #de6d38); /* Плавное движение градиента при наведении */
+    transform: scale(1.05);
+}
+
+/* Общий контейнер для карусели */
+.logo-carousel-container {
+    position: relative;
+    width: 100%;
+    height: 300px; /* Высота карусели */
+    overflow: hidden; /* Скрываем элементы за пределами области */
+    display: flex;
+    align-items: center;
+    mask-image: linear-gradient(to right, transparent, white 30%, white 70%, transparent); /* Градиентная маска */
+    -webkit-mask-image: linear-gradient(to right, transparent, white 30%, white 70%, transparent); /* Для WebKit браузеров */
+}
+
+/* Лента с логотипами */
+.logo-carousel {
+    display: flex;
+    align-items: center;
+    gap: 100px; /* Расстояние между логотипами */
+    animation: scroll-left 20s linear infinite; /* Анимация прокрутки */
+    will-change: transform; /* Оптимизация анимации */
+}
+
+/* Логотипы */
+.logo-item img {
+    width: 200px; /* Размер логотипа */
+    height: auto;
+    filter: brightness(0) invert(1); /* Белый цвет логотипов */
+    transition: transform 0.3s ease; /* Увеличение при наведении */
+}
+
+.logo-item img:hover {
+    transform: scale(1.2); /* Увеличение логотипа при наведении */
+}
+
+/* Анимация бесконечной прокрутки */
+@keyframes scroll-left {
+    from {
+        transform: translateX(0); /* Начальная позиция */
+    }
+    to {
+        transform: translateX(-50%); /* Сдвиг на половину ширины, чтобы зациклить */
+    }
+}
+
+/* Раздел "Как мы работаем" */
+.workflow {
+    padding: 0;
+    text-align: left;
+}
+
+.workflow-step.active {
+    transform: translateY(-10px);
+    border: 2px solid #de6d38;
+}
+
+.workflow-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin: 0;
+}
+
+.workflow-steps-container {
+    overflow: hidden;
+    position: relative;
+    width: 100%;
+    max-width: 100%;
+    padding: 10px 0 0 0;
+}
+
+.workflow-title {
+    font-family: 'Bebas Neue', sans-serif;
+    font-size: 80px;
+    margin: 0 0 10px;
+}
+
+.scroll-buttons {
+    display: flex;
+    gap: 10px;
+}
+
+.scroll-button {
+    background: rgba(51, 51, 51, 0.2);
+    border: none;
+    width: 50px;
+    height: 50px;
+    border-radius: 50%;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    transition: background-color 0.3s ease, transform 0.2s ease;
+    padding: 0;
+}
+
+.scroll-button img {
+    width: 24px;
+    height: 24px;
+    filter: brightness(0) invert(1);
+}
+
+.scroll-button:hover {
+    background-color: #de6d38;
+    transform: scale(1.05);
+}
+
+.rotate-180 {
+    transform: rotate(180deg);
+}
+
+/* Круглая цифра */
+.workflow-circle-number {
+    font-family: 'Bebas Neue', sans-serif;
+    font-size: 60px;
+    color: white;
+    background: rgba(51, 51, 51, 0.2);
+    width: 80px;
+    height: 80px;
+    font-weight: bold;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin: 0 auto 20px;
+}
+
+/* Блоки workflow в виде карточек */
+.workflow-steps {
+    display: flex;
+    gap: 30px;
+    transition: transform 0.5s ease;
+    will-change: transform;
+    justify-content: space-between;
+}
+
+.workflow-step {
+    flex: 0 0 calc((100% - 60px) / 3); /* 60px = два промежутка по 30px */
+    box-sizing: border-box;
+    background-color: rgba(255, 255, 255, 0.03);
+    padding: 40px;
+    border-radius: 15px;
+    text-align: center;
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    min-width: 0;
+    border: 2px solid transparent;
+    transition: transform 0.3s ease, border 0.3s ease;
+    position: relative;
+}
+
+/* Добавляем серую линию над плашками */
+.workflow-step::before {
+    content: "";
+    position: absolute;
+    top: -15px;  /* Отступ от верхней границы плашки */
+    left: 0;
+    width: 100%;
+    height: 1px;
+    background-color: #ccc; /* Цвет серой линии */
+}
+
+/* Заголовки и описания */
+.workflow-step h3 {
+    font-family: 'Bebas Neue', sans-serif;
+    font-size: 32px;
+    margin: 0 0 10px;
+}
+
+.workflow-step p {
+    font-size: 18px;
+    color: #ddd;
+    margin: 0;
+}
+
+.faq {
+    display: flex;
+    margin: 100px 0 0 0;
+    max-width: 1600px;
+    gap: 40px;
+    flex-wrap: wrap;
+}
+.faq-left {
+    flex: 1 1 300px;
+}
+.faq-left h2 {
+    font-family: 'Bebas Neue', sans-serif;
+    font-size: 80px;
+    margin: 0 0 10px;
+    line-height: 80px;
+}
+.faq-right {
+    flex: 2 1 600px;
+}
+.faq-item {
+    border-bottom: 1px solid #ccc;
+    padding: 15px 0;
+    cursor: pointer;
+}
+.faq-question {
+    font-size: 25px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+.faq-answer {
+    max-height: 0;
+    overflow: hidden;
+    color: #808080;
+    transition: max-height 0.3s ease, padding-top 0.3s;
+    padding-top: 0;
+}
+.faq-item.active .faq-answer {
+    max-height: 500px;
+    padding-top: 10px;
+}
+.arrow {
+    transition: transform 0.3s ease;
+}
+.faq-item.active .arrow {
+    transform: rotate(180deg);
+}
+
+.arrow img {
+    width: 24px;
+    height: 24px;
+    transition: transform 0.3s ease, filter 0.3s ease;
+    filter: brightness(0) invert(1); /* делает изображение белым */
+}
+
+/* При открытии (активном состоянии) — поворачиваем вверх */
+.faq-item.active .arrow img {
+    transform: rotate(-90deg); /* из вниз в вверх */
+}
+
+.rotate-90 {
+    transform: rotate(-90deg);
+}
+
+.cta-overlay {
+    position: relative;
+    display: flex;
+    align-items: center;
+    margin: 20px 0;
+    justify-content: center;
+    padding: 100px 0;
+    background-color: #0b0a0a;
+    overflow: hidden;
+    border-radius: 40px;
+    text-align: center;
+    height: 400px; /* задаём фиксированную высоту */
+}
+
+.cta-overlay .cta-image {
+    position: absolute;
+    z-index: 1;
+    opacity: 0.2;
+    height: 100%;
+    width: 1000px;
+    overflow: hidden;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.cta-overlay .cta-img {
+    height: 70%;
+    width: 1000px;
+    object-fit: cover;
+    border-radius: inherit;
+    min-width: 100%; /* обрезка по ширине */
+}
+
+.cta-overlay .cta-text {
+    position: relative;
+    z-index: 2;
+    color: #e0e0e0;
+    max-width: 800px;
+}
+
+.cta-overlay .cta-text h1 {
+    font-size: 100px;
+    font-family: 'Bebas Neue', sans-serif;
+    font-weight: bold;
+    margin-bottom: 20px;
+    line-height: 100px;
+}
+
+.cta-overlay .cta-text p {
+    font-size: 20px;
+    margin: 0 0 40px 0;
+}
+
+.pricing-section {
+    margin: 30px 0 80px 0;
+    max-width: 1600px;
+}
+
+.pricing-section h2 {
+    font-family: 'Bebas Neue', sans-serif;
+    font-size: 80px;
+    line-height: 80px;
+    text-align: center;
+    margin: 0 0 40px 0;
+}
+
+.pricing-cards {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 30px;
+}
+
+.pricing-card {
+    flex: 1 1 calc((100% - 60px) / 3); /* 3 колонки с учётом 2 промежутков по 30px */
+    min-width: 280px;
+    background-color: rgba(255, 255, 255, 0.03);
+    border: 2px solid transparent;
+    border-radius: 20px;
+    padding: 70px 30px;
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+    text-align: center;
+    transition: border 0.3s ease, transform 0.3s ease;
+    box-sizing: border-box;
+}
+
+.pricing-card:hover {
+    transform: translateY(-10px);
+    border: 2px solid #de6d38;;
+}
+
+.pricing-card h3 {
+    font-family: 'Bebas Neue', sans-serif;
+    font-size: 36px;
+    margin: 0 0 10px 0;
+}
+
+.pricing-card .price {
+    font-size: 60px;
+    font-weight: bold;
+    color: #de6d38;
+    margin: 10px 0 10px 0;
+    font-family: 'Bebas Neue', sans-serif;
+}
+
+.pricing-card ul {
+    list-style: none;
+    padding: 0;
+    margin: 0 0 40px 0;
+}
+
+.pricing-card ul li {
+    font-size: 18px;
+    color: #ccc;
+    margin-bottom: 10px;
+}
+
+/* Общий контейнер секции */
+.request-section {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 800px;
+    background-color: transparent;
+}
+
+/* Контейнер формы */
+.container {
+    background: rgba(51, 51, 51, 0.2);
+    padding: 2rem 3rem;
+    border-radius: 12px;
+    width: 100%;
+    max-width: 500px;
+    color: #e0e0e0;
+    text-align: center;
+    box-sizing: border-box;
+    font-family: 'Manrope', sans-serif;
+}
+
+/* Заголовок */
+.section-title {
+    font-size: 60px;
+    margin-bottom: 40px;
+    color: #fff;
+    font-family: 'Bebas Neue', sans-serif;
+}
+
+/* Обёртка для полей формы */
+.request-form {
+    display: flex;
+    flex-direction: column;
+    gap: 1.5rem;
+    font-family: 'Manrope', sans-serif;
+}
+
+/* Каждое поле формы */
+.form-group {
+    display: flex;
+    flex-direction: column;
+    text-align: left;
+}
+
+/* Метки */
+.form-group label {
+    margin-bottom: 0.5rem;
+    font-size: 1rem;
+    color: #e0e0e0;
+}
+
+/* Инпуты, селекты и текстовое поле */
+.request-form input,
+.request-form select,
+.request-form textarea {
+    width: 100%;
+    padding: 0.8rem 1.6rem;
+    background: rgba(51, 51, 51, 0.2);
+    color: #e0e0e0;
+    border: 1px solid #252525;
+    border-radius: 10px;
+    font-size: 1rem;
+    font-family: 'Manrope', sans-serif;
+    box-sizing: border-box;
+}
+
+/* Стилизация селектов с белым текстом и темным фоном */
+.request-form select {
+    color: #fff;
+    background-color: #252525; /* Темный фон */
+}
+
+/* Убираем возможность растягивания textarea */
+.request-form textarea {
+    resize: none;
+}
+
+/* Фокус */
+.request-form input:focus,
+.request-form select:focus,
+.request-form textarea:focus {
+    outline: none;
+    border-color: #de6d38;
+}
+
+/* Кнопка отправки */
+.req-btn {
+    width: 100%;
+    padding: 0.8rem 1.6rem;
+    background: linear-gradient(45deg, #de6d38, #c98c60);
+    color: #fff;
+    text-decoration: none;
+    border-radius: 10px;
+    font-size: 1rem;
+    transition: background 0.3s ease, transform 0.2s ease;
+    border: none;
+    cursor: pointer;
+}
+
+.req-btn:hover {
+    background: linear-gradient(45deg, #c98c60, #de6d38);
+    transform: scale(1.05);
+}
+
+/* Общий контейнер секции с заявками */
+.request-list-section {
+    font-family: 'Manrope', sans-serif;
+}
+
+/* Заголовок секции с заявками */
+.request-list-section h1 {
+    font-size: 80px;
+    margin-bottom: 2rem;
+    color: #fff;
+    text-align: center;
+    font-family: 'Bebas Neue', sans-serif;
+}
+
+/* Контейнер для списка заявок */
+.request-item-list {
+    list-style-type: none;
+    padding: 0;
+    margin: 0;
+}
+
+.request-item {
+    background-color: rgba(51, 51, 51, 0.3);
+    margin: 1rem 0;
+    padding: 1.2rem;
+    border-radius: 8px;
+    font-size: 1.1rem;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    color: #e0e0e0;
+}
+
+.request-item a {
+    color: #e0e0e0;
+    text-decoration: none;
+}
+
+.request-item a:hover {
+    color: #de6d38;
+}
+
+/* Контейнер для фильтра */
+.filter-form {
+    margin-top: 2rem;
+    display: flex;
+    justify-content: center;
+    gap: 1rem;
+    align-items: center;
+}
+
+/* Селект для фильтрации заявок */
+.filter-form select {
+    padding: 0.8rem 1.6rem;
+    color: #fff;
+    background-color: #252525; /* Темный фон */
+    border: 1px solid #252525;
+    border-radius: 10px;
+    font-size: 1rem;
+    font-family: 'Manrope', sans-serif;
+    width: 150px; /* Установим фиксированную ширину */
+}
+
+/* Кнопка фильтрации */
+.filter-form button {
+    padding: 0.8rem 1.6rem;
+    background: linear-gradient(45deg, #de6d38, #c98c60);
+    color: #fff;
+    border-radius: 10px;
+    font-size: 1rem;
+    border: none;
+    cursor: pointer;
+    transition: background 0.3s ease, transform 0.2s ease;
+}
+
+.filter-form button:hover {
+    background: linear-gradient(45deg, #c98c60, #de6d38);
+    transform: scale(1.05);
+}
+
+/* Кнопка для создания новой заявки */
+.new-request-btn {
+    display: block;
+    padding: 1rem 2rem;
+    background: linear-gradient(45deg, #de6d38, #c98c60);
+    color: #fff;
+    text-align: center;
+    text-decoration: none;
+    border-radius: 10px;
+    font-size: 1rem;
+    transition: background 0.3s ease, transform 0.2s ease;
+    margin-top: 2rem;
+}
+
+.new-request-btn:hover {
+    background: linear-gradient(45deg, #c98c60, #de6d38);
+    transform: scale(1.05);
+}
+
+/* Общие стили для страницы */
+.request-section {
+    padding: 2rem;
+    display: flex;
+    justify-content: center;
+}
+
+.container {
+    max-width: 800px;
+    width: 100%;
+    background: rgba(51, 51, 51, 0.2);
+    border-radius: 12px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    padding: 2rem;
+}
+
+/* Заголовок */
+.section-title {
+    font-size: 80px;
+    margin: 0;
+    color: #fff;
+    text-align: center;
+    font-family: 'Bebas Neue', sans-serif;
+}
+
+/* Стили для блока с деталями заявки */
+.request-details {
+    display: flex;
+    flex-direction: column;
+    gap: 1.5rem;
+}
+
+.request-detail-item {
+    display: flex;
+    flex-direction: column;
+    gap: 0.5rem;
+}
+
+.request-detail-item strong {
+    font-weight: bold;
+    font-size: 1.1rem;
+}
+
+.request-detail-item p {
+    font-size: 1rem;
+}
+
+.filter-form select {
+    padding: 0.8rem 1.6rem;
+    color: #fff;
+    background-color: #252525; /* Темный фон */
+    border: 1px solid #252525;
+    border-radius: 10px;
+    font-size: 1rem;
+    font-family: 'Manrope', sans-serif;
+    width: 150px; /* Установим фиксированную ширину */
+    appearance: none; /* Убираем стандартную стрелочку */
+    -webkit-appearance: none; /* Для Webkit браузеров */
+    -moz-appearance: none; /* Для Firefox */
+}
+
+/* Скрыть стрелку в IE */
+.filter-form select::-ms-expand {
+    display: none;
+}
+
+.btn-danger {
+    padding: 0.8rem 1.6rem;
+    background-color: #e74c3c;
+    color: #fff;
+    border: none;
+    border-radius: 10px;
+    font-size: 1rem;
+    font-family: 'Manrope', sans-serif;
+    cursor: pointer;
+}
+
+.btn-danger:hover {
+    background-color: #c0392b;
+}
+
+.status-form {
+    margin-top: 0.5rem;
+}
+
+.status-select {
+    padding: 0.6rem 1.2rem;
+    background-color: #252525;
+    color: #fff;
+    border: 1px solid #444;
+    border-radius: 10px;
+    font-size: 1rem;
+    font-family: 'Manrope', sans-serif;
+    width: 170px;
+    cursor: pointer;
+    appearance: none; /* убирает системные стрелки */
+    background-image: url("data:image/svg+xml;utf8,<svg fill='white' height='24' viewBox='0 0 24 24' width='24' xmlns='http://www.w3.org/2000/svg'><path d='M7 10l5 5 5-5z'/></svg>");
+    background-repeat: no-repeat;
+    background-position: right 1rem center;
+    background-size: 1rem;
+}
+
+.status-select:focus {
+    outline: none;
+    border-color: #888;
+}
+
+.status-select option {
+    background-color: #252525;
+    color: #fff;
+}
+
+.contacts-section {
+    padding: 60px 0 0 0;
+    color: #fff;
+    font-family: 'Manrope', sans-serif;
+    text-align: center;
+}
+
+.contacts-container {
+    max-width: 600px;
+    margin: 0 auto;
+    padding: 2rem;
+    border-radius: 16px;
+}
+
+.contacts-title {
+    font-family: 'Bebas Neue', sans-serif;
+    font-size: 80px;
+    margin: 0 0 10px;
+    line-height: 80px;
+}
+
+.contacts-subtitle {
+    font-size: 1rem;
+    margin-bottom: 2rem;
+    color: #ccc;
+}
+
+.contact-info p {
+    margin: 0.5rem 0;
+    font-size: 1rem;
+}
+
+.contact-info a {
+    color: #fff;
+    text-decoration: underline;
+}
+
+.contact-info a:hover {
+    color: #ffcb05;
+}
+
+.map-container {
+    margin-top: 2rem;
+    border-radius: 10px;
+    width: 1600px;
+    overflow: hidden;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.2);
+}
+
+/* Стили для секции 'О нас' */
+.about-section {
+    padding: 0;
+}
+
+.about-container {
+    max-width: 1600px;
+    margin: 40px 0 0 0;
+}
+
+.about-title {
+    font-family: 'Bebas Neue', sans-serif;
+    font-size: 80px;
+    margin: 0 0 10px;
+    line-height: 80px;
+    text-align: center;
+}
+
+.about-subtitle {
+    font-size: 20px;
+    margin-bottom: 40px;
+    text-align: center;
+}
+
+.about-content {
+    font-size: 18px;
+    line-height: 1.6;
+    margin-bottom: 40px;
+}
+
+/* Блок с фото слева и текстом справа */
+.about-info {
+    display: flex;
+    align-items: flex-start;
+    margin-bottom: 30px;
+    align-items: center;
+}
+
+.about-img-container {
+    flex: 1;
+    max-width: 45%;
+}
+
+.about-img {
+    width: 100%;
+    height: auto;
+    border-radius: 15px;
+}
+
+.about-text {
+    flex: 1;
+    padding-left: 2rem;
+    text-align: left;
+}
+
+.about-text p {
+    font-size: 18px;
+}
+
+.about-text ul {
+    list-style-type: none;
+    padding: 0;
+}
+
+.about-text ul li {
+    font-size: 18px;
+    margin-bottom: 10px;
+}
+
+/* Статистика */
+.about-stats {
+    display: flex;
+    justify-content: center;
+    gap: 50px;
+    margin-bottom: 40px;
+}
+
+.stat {
+    text-align: center;
+}
+
+.stat h2 {
+    font-size: 50px;
+    font-family: 'Bebas Neue', sans-serif;
+    color: #de6d38;
+}
+
+.stat p {
+    font-size: 18px;
+    color: #777;
+}
+
+h2 {
+    font-size: 32px;
+    margin-top: 50px;
+}
+
+ul {
+    list-style-type: none;
+    padding: 0;
+    margin-top: 20px;
+}
+
+ul li {
+    font-size: 18px;
+    margin-bottom: 10px;
+}

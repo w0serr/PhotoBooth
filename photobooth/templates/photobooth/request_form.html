@@ -1,0 +1,22 @@
+{% extends 'photobooth/base.html' %}
+
+{% block title %}Создание заявки{% endblock %}
+
+{% block content %}
+<section class="request-section">
+    <div class="container">
+        <h1 class="section-title">Создание заявки</h1>
+        <form method="post" class="request-form">
+            {% csrf_token %}
+            <div class="form-group">
+                {{ form.pricing_package.label_tag }}
+                {{ form.pricing_package }}
+            </div>
+            <div class="form-group">
+                {{ form.description }}
+            </div>
+            <button type="submit" class="req-btn">Отправить заявку</button>
+        </form>
+    </div>
+</section>
+{% endblock %}
