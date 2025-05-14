@@ -23,7 +23,7 @@
         {% for request in object_list %}
             <li class="request-item">
                 <a href="{% url 'request_detail' request.id %}">{{ request.description }}</a>
-                <span>({{ request.get_status_display }})</span>
+                <span class="request-status-text">({{ request.get_status_display }})</span>
 
                 {% if user.is_superuser %}
                     <form method="post" action="{% url 'change_status' request.id %}" class="status-form">

@@ -4,18 +4,44 @@
 
 {% block content %}
 <section class="contacts-section">
-        <h1 class="contacts-title">Контакты</h1>
-        <p class="contacts-subtitle">Если у вас есть вопросы, не стесняйтесь обращаться к нам!</p>
+    <h1 class="contacts-title">Контакты</h1>
+    <p class="contacts-subtitle">Если у вас есть вопросы, не стесняйтесь обращаться к нам!</p>
 
-        <div class="contact-info">
-            <p>+7 924 372-54-49</p>
-            <p><a href="mailto:support@photobooth.com">support@photobooth.com</a></p>
-            <p>г. Чита, Красноармейская улица, 69</p>
-        </div>
+    <div class="contact-info">
+        <p id="phone">{{ contact_info.phone }}</p>
+        <p id="email"><a href="mailto:{{ contact_info.email }}">{{ contact_info.email }}</a></p>
+        <p id="address">{{ contact_info.address }}</p>
+    </div>
 
-        <div class="map-container">
-            <iframe src="https://yandex.ru/map-widget/v1/?ll=113.500847%2C52.050663&z=16&pt=113.500847,52.050663,pm2rdl"
-                    width="100%" height="400" frameborder="0" allowfullscreen style="border-radius: 10px;"></iframe>
-        </div>
+    <div class="contact-edit">
+        {% if user.is_superuser %}
+            <button id="edit-button" class="new-request-btn" onclick="toggleEdit()">Редактировать данные</button>
+            <div id="edit-form" style="display: none;">
+                <form method="POST" action="{% url 'edit_contacts' %}">
+                    {% csrf_token %}
+                    <textarea name="phone" id="phone-input">{{ contact_info.phone }}</textarea><br>
+                    <textarea name="email" id="email-input">{{ contact_info.email }}</textarea><br>
+                    <textarea name="address" id="address-input">{{ contact_info.address }}</textarea><br>
+                    <button type="submit" class="new-request-btn">Сохранить</button>
+                </form>
+            </div>
+        {% endif %}
+    </div>
+
+    <div class="map-container">
+        <iframe src="https://yandex.ru/map-widget/v1/?ll=113.500847%2C52.050663&z=16&pt=113.500847,52.050663,pm2rdl"
+                width="100%" height="400" frameborder="0" allowfullscreen style="border-radius: 10px;"></iframe>
+    </div>
+
 </section>
+
+<script>
+    function toggleEdit() {
+        const form = document.getElementById('edit-form');
+        const button = document.getElementById('edit-button');
+        form.style.display = form.style.display === 'none' ? 'block' : 'none';
+        button.innerText = form.style.display === 'none' ? 'Редактировать' : 'Отмена';
+    }
+</script>
+
 {% endblock %}

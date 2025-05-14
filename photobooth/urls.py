@@ -15,11 +15,12 @@ urlpatterns = [
     path('pricing/', HomeView.as_view(), name='pricing'),
     path('profile/', views.ProfileView.as_view(), name='profile'),
     path('process/', views.ProcessView.as_view(), name='process'),
-    path('contacts/', views.ContactsView.as_view(), name='contacts'),
     path('login/', LoginView.as_view(template_name='photobooth/login.html'), name='login'),
     path('register/', views.register, name='register'),
     path('requests/', views.RequestListView.as_view(), name='request_list'),
     path('requests/<int:pk>/', views.RequestDetailView.as_view(), name='request_detail'),
     path('requests/create/', views.RequestCreateView.as_view(), name='request_create'),
     path('logout/', custom_logout_view, name='logout'),
+    path('contacts/edit/', views.edit_contacts, name='edit_contacts'),
+    path('contacts/', views.contacts_view, name='contacts'),
 ]

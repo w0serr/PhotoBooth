@@ -2,6 +2,7 @@ from django.contrib import admin
 from .models import *
 
 admin.site.register(PricingPackage)
+admin.site.register(ContactInfo)
 
 @admin.register(Client)
 class ClientAdmin(admin.ModelAdmin):

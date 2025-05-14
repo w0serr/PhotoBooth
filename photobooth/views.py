@@ -6,12 +6,12 @@ from django.utils.decorators import method_decorator
 from django.core.mail import send_mail
 from django.contrib.auth import logout
 from .forms import RegistrationForm
-from .models import Request, PricingPackage
+from .models import *
 from .forms import RequestForm
 from django.shortcuts import get_object_or_404, redirect
 from django.contrib.auth.decorators import user_passes_test
-
-import telegram
+from django.contrib.admin.views.decorators import staff_member_required
+from django.contrib import messages
 
 TELEGRAM_TOKEN = '7657287697:AAGPEfe0cosV0LD5loz-2IOALxc0UcG1o_c'
 TELEGRAM_CHAT_ID = '755335572'
@@ -31,6 +31,27 @@ class ContactsView(TemplateView):
 class RegisterView(CreateView):
     template_name = 'photobooth/register.html'
     form_class = UserCreationForm
+
+def contacts_view(request):
+    # Получаем контактную информацию
+    contact_info = ContactInfo.objects.first()  # Или используйте .get(), если уверены, что записи есть
+    return render(request, 'photobooth/contacts.html', {'contact_info': contact_info})
+
+@staff_member_required
+def edit_contacts(request):
+    contact_info = ContactInfo.objects.first()  # Получаем первые данные, или можно выбрать через filter()
+
+    if request.method == 'POST':
+        # Обновляем информацию
+        contact_info.phone = request.POST.get('phone')
+        contact_info.email = request.POST.get('email')
+        contact_info.address = request.POST.get('address')
+        contact_info.save()
+
+        messages.success(request, 'Контактные данные успешно обновлены!')
+        return redirect('contacts')
+
+    return render(request, 'photobooth/contacts.html', {'contact_info': contact_info})
 
 class HomeView(TemplateView):
     template_name = 'photobooth/home.html'

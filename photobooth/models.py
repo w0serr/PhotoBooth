@@ -57,3 +57,11 @@ class Testimonial(models.Model):
 
     def __str__(self):
         return f"Testimonial by {self.client.user.username}"
+
+class ContactInfo(models.Model):
+    phone = models.CharField(max_length=20)
+    email = models.EmailField()
+    address = models.TextField()
+
+    def __str__(self):
+        return f"Contact Info"

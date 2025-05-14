@@ -973,10 +973,15 @@ header .logout-btn:hover {
 .request-item a {
     color: #e0e0e0;
     text-decoration: none;
+    width: 370px;
 }
 
 .request-item a:hover {
     color: #de6d38;
+}
+
+.request-status-text {
+    width: 120px;
 }
 
 /* Контейнер для фильтра */
@@ -1035,6 +1040,8 @@ header .logout-btn:hover {
     background: linear-gradient(45deg, #c98c60, #de6d38);
     transform: scale(1.05);
 }
+
+
 
 /* Общие стили для страницы */
 .request-section {
@@ -1189,6 +1196,21 @@ header .logout-btn:hover {
     color: #ffcb05;
 }
 
+
+.contact-edit {
+    display: flex;
+    justify-content: center;
+    flex-direction: column;
+    align-items: center; /* Центрирование содержимого по горизонтали */
+    width: 100%; /* Для того, чтобы элементы внутри занимали всю доступную ширину */
+}
+
+textarea {
+    width: 100%; /* Сделает поля ввода шириной 100% контейнера */
+    max-width: 400px; /* Ограничение ширины текстовых полей */
+    margin: 0 0 5px 0;
+}
+
 .map-container {
     margin-top: 2rem;
     border-radius: 10px;
@@ -1303,4 +1325,45 @@ ul {
 ul li {
     font-size: 18px;
     margin-bottom: 10px;
+}
+
+#edit-form {
+    margin-top: 2rem;
+}
+
+#edit-form textarea {
+    width: 100%;
+    padding: 0.8rem 1.6rem;
+    background: rgba(51, 51, 51, 0.2);
+    color: #e0e0e0;
+    border: 1px solid #252525;
+    border-radius: 10px;
+    font-size: 1rem;
+    font-family: 'Manrope', sans-serif;
+    box-sizing: border-box;
+    resize: none;
+}
+
+#edit-form button {
+    display: inline-block;
+    padding: 1rem 2rem;
+    background: linear-gradient(45deg, #de6d38, #c98c60);
+    color: #fff;
+    text-align: center;
+    text-decoration: none;
+    border-radius: 10px;
+    font-size: 1rem;
+    transition: background 0.3s ease, transform 0.2s ease;
+    cursor: pointer;
+    border: none;
+}
+
+#edit-form button:hover {
+    background: linear-gradient(45deg, #c98c60, #de6d38);
+    transform: scale(1.05);
+}
+
+#edit-form textarea:focus {
+    outline: none;
+    border-color: #de6d38;
 }
