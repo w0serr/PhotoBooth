@@ -23,4 +23,7 @@ urlpatterns = [
     path('logout/', custom_logout_view, name='logout'),
     path('contacts/edit/', views.edit_contacts, name='edit_contacts'),
     path('contacts/', views.contacts_view, name='contacts'),
+    path('gallery/', views.GalleryView.as_view(), name='gallery'),
+    path('reviews/', views.ReviewListView.as_view(), name='review_list'),
+    path('reviews/add/', views.ReviewCreateView.as_view(), name='review_create'),
 ]

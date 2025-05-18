@@ -1,0 +1,45 @@
+{% extends 'photobooth/base.html' %}
+{% block title %}Отзывы{% endblock %}
+
+{% block content %}
+<section class="request-section">
+  <div class="container-gallery">
+    <!-- Заголовок по центру -->
+    <h1 class="section-title">Отзывы клиентов</h1>
+
+    {% if user.is_authenticated %}
+      <div style="text-align: center; margin-bottom: 60px; margin-top: 10px;">
+        <a href="{% url 'review_create' %}" class="req-btn">Оставить отзыв</a>
+      </div>
+    {% endif %}
+
+    <div class="review-grid">
+      {% for review in reviews %}
+        <div class="review-card">
+          <div class="review-header">
+            <div class="review-avatar">{{ review.user.username|first|upper }}</div>
+            <div>
+              <strong>{{ review.user.username }}</strong>
+            </div>
+          </div>
+
+          <div class="review-body">
+            <p>{{ review.text }}</p>
+            <div class="stars">
+              {% for i in "12345" %}
+                <span class="star {% if forloop.counter <= review.rating %}filled{% endif %}">★</span>
+              {% endfor %}
+            </div>
+            <div class="review-footer">
+              {{ review.created_at|date:"d.m.Y H:i" }}
+            </div>
+          </div>
+        </div>
+      {% empty %}
+        <p style="text-align: center;">Пока нет отзывов.</p>
+      {% endfor %}
+    </div>
+
+  </div>
+</section>
+{% endblock %}

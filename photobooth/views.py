@@ -1,8 +1,6 @@
-from django.shortcuts import render, redirect
+from django.shortcuts import render
 from django.views.generic import TemplateView, ListView, DetailView, CreateView
 from django.contrib.auth.forms import UserCreationForm
-from django.contrib.auth.decorators import login_required
-from django.utils.decorators import method_decorator
 from django.core.mail import send_mail
 from django.contrib.auth import logout
 from .forms import RegistrationForm
@@ -12,6 +10,14 @@ from django.shortcuts import get_object_or_404, redirect
 from django.contrib.auth.decorators import user_passes_test
 from django.contrib.admin.views.decorators import staff_member_required
 from django.contrib import messages
+import asyncio
+from telegram import Bot
+from telegram.request import HTTPXRequest
+from django.urls import reverse_lazy
+from .models import Review, Request
+from .forms import ReviewForm
+from django.contrib.auth.decorators import login_required
+from django.utils.decorators import method_decorator
 
 TELEGRAM_TOKEN = '7657287697:AAGPEfe0cosV0LD5loz-2IOALxc0UcG1o_c'
 TELEGRAM_CHAT_ID = '755335572'
@@ -134,33 +140,55 @@ class RequestDetailView(DetailView):
     model = Request
     template_name = 'photobooth/request_detail.html'
 
+
 @method_decorator(login_required, name='dispatch')
 class RequestCreateView(CreateView):
     model = Request
     form_class = RequestForm
     template_name = 'photobooth/request_form.html'
+    success_url = reverse_lazy('request_list')  # ✅ вот это обязательно
 
     def form_valid(self, form):
         form.instance.client = self.request.user.client
-        form.save()
+        response = super().form_valid(form)
 
-        # Отправка email
+        # ✉ Email
+        email_text = (
+            f"Создана новая заявка #{form.instance.id} пользователем {self.request.user.username}.\n"
+            f"Пожелания: {form.instance.description}\n"
+            f"Контакты: {form.instance.contact_info}\n"
+            f"Дата мероприятия: {form.instance.event_date}\n"
+            f"Количество гостей: {form.instance.guest_count}"
+        )
         send_mail(
             'Новая заявка создана',
-            f"Заявка #{form.instance.id} была создана пользователем {self.request.user.username}.",
+            email_text,
             'your_email@gmail.com',
-            ['vzn.serg@gmail.com'],  # Email администратора
+            ['vzn.serg@gmail.com'],
             fail_silently=False,
         )
 
-        # Уведомление в Telegram
-        bot = telegram.Bot(token=TELEGRAM_TOKEN)
-        bot.send_message(
-            chat_id=TELEGRAM_CHAT_ID,
-            text=f"Новая заявка #{form.instance.id} от {self.request.user.username}: {form.instance.description}"
-        )
+        # 🤖 Telegram
+        async def send_telegram_message():
+            request_obj = HTTPXRequest(connect_timeout=5.0, read_timeout=5.0)
+            bot = Bot(token=TELEGRAM_TOKEN, request=request_obj)
+            telegram_text = (
+                f" Новая заявка #{form.instance.id}\n"
+                f" Пользователь: {self.request.user.username}\n"
+                f" Пожелания: {form.instance.description}\n"
+                f" Контакты: {form.instance.contact_info}\n"
+                f" Дата: {form.instance.event_date}\n"
+                f" Гостей: {form.instance.guest_count}"
+            )
+            await bot.send_message(chat_id=TELEGRAM_CHAT_ID, text=telegram_text)
 
-        return redirect('request_list')
+        try:
+            asyncio.run(send_telegram_message())
+        except Exception as e:
+            print(f"Ошибка при отправке в Telegram: {e}")
+
+        return response
+
 
 class ProfileView(TemplateView):
     template_name = 'photobooth/profile.html'
@@ -168,3 +196,54 @@ class ProfileView(TemplateView):
 def custom_logout_view(request):
     logout(request)
     return redirect('home')  # Замените 'home' на нужный URL
+
+class GalleryView(TemplateView):
+    template_name = 'photobooth/gallery.html'
+
+    def get_context_data(self, **kwargs):
+        context = super().get_context_data(**kwargs)
+        context['images'] = GalleryImage.objects.order_by('-uploaded_at')
+        return context
+
+@method_decorator(login_required, name='dispatch')
+class ReviewCreateView(CreateView):
+    model = Review
+    form_class = ReviewForm
+    template_name = 'photobooth/review_form.html'
+    success_url = reverse_lazy('review_list')
+
+    def dispatch(self, request, *args, **kwargs):
+        # Проверка: есть ли заявки у пользователя
+        has_request = Request.objects.filter(client=request.user.client).exists()
+        if not has_request:
+            return redirect('review_list')  # Или показ сообщения, что отзыв недоступен
+        return super().dispatch(request, *args, **kwargs)
+
+    def form_valid(self, form):
+        form.instance.user = self.request.user
+        form.instance.request = Request.objects.filter(client=self.request.user.client).last()
+        return super().form_valid(form)
+
+class ReviewListView(ListView):
+    model = Review
+    template_name = 'photobooth/review_list.html'
+    context_object_name = 'reviews'
+    ordering = ['-created_at']
+
+
+@method_decorator(login_required, name='dispatch')
+class ReviewCreateView(CreateView):
+    model = Review
+    form_class = ReviewForm
+    template_name = 'photobooth/review_form.html'
+    success_url = reverse_lazy('review_list')
+
+    def dispatch(self, request, *args, **kwargs):
+        if not Request.objects.filter(client=request.user.client).exists():
+            return redirect('review_list')
+        return super().dispatch(request, *args, **kwargs)
+
+    def form_valid(self, form):
+        form.instance.user = self.request.user
+        form.instance.request = Request.objects.filter(client=self.request.user.client).last()
+        return super().form_valid(form)

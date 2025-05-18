@@ -4,20 +4,34 @@
 
 {% block content %}
 <section class="request-section">
-    <div class="container">
+    <div class="container_r">
         <h1 class="section-title">Заявка #{{ object.id }}</h1>
         <div class="request-details">
             <div class="request-detail-item">
                 <strong>Описание:</strong>
                 <p>{{ object.description }}</p>
             </div>
+
+            <div class="request-detail-item">
+                <strong>Контактные данные:</strong>
+                <p>{{ object.contact_info }}</p>
+            </div>
+            <div class="request-detail-item">
+                <strong>Дата мероприятия:</strong>
+                <p>{{ object.event_date|date:"d.m.Y" }}</p>
+            </div>
+            <div class="request-detail-item">
+                <strong>Количество гостей:</strong>
+                <p>{{ object.guest_count }}</p>
+            </div>
+
             <div class="request-detail-item">
                 <strong>Статус:</strong>
                 <p>{{ object.get_status_display }}</p>
             </div>
             <div class="request-detail-item">
                 <strong>Дата создания:</strong>
-                <p>{{ object.created_at }}</p>
+                <p>{{ object.created_at|date:"d.m.Y H:i" }}</p>
             </div>
             <a href="{% url 'request_list' %}" class="btn back-btn">Назад к списку</a>
         </div>

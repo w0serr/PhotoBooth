@@ -1,7 +1,7 @@
 from django import forms
 from django.contrib.auth.forms import UserCreationForm
 from django.contrib.auth.models import User
-from .models import Request, PricingPackage
+from .models import *
 
 class RegistrationForm(UserCreationForm):
     email = forms.EmailField()
@@ -20,7 +20,19 @@ class RequestForm(forms.ModelForm):
 
     class Meta:
         model = Request
-        fields = ['description', 'pricing_package']
+        fields = ['description', 'pricing_package', 'contact_info', 'event_date', 'guest_count']
         widgets = {
             'description': forms.Textarea(attrs={'class': 'form-control', 'placeholder': 'Опишите ваши пожелания'}),
+            'contact_info': forms.TextInput(attrs={'class': 'form-control', 'placeholder': 'Телефон или e-mail'}),
+            'event_date': forms.DateInput(attrs={'type': 'date', 'class': 'form-control'}),
+            'guest_count': forms.NumberInput(attrs={'class': 'form-control', 'placeholder': 'Примерное число гостей'}),
+        }
+
+class ReviewForm(forms.ModelForm):
+    class Meta:
+        model = Review
+        fields = ['rating', 'text']
+        widgets = {
+            'rating': forms.Select(attrs={'class': 'form-control'}),
+            'text': forms.Textarea(attrs={'class': 'form-control', 'placeholder': 'Ваш отзыв...'}),
         }

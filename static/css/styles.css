@@ -97,7 +97,7 @@ footer {
     background: #0b0a0a;
     color: #e0e0e0;
     text-align: center;
-    padding: 80px 0 40px 0;
+    margin: 80px 0 40px 0;
     position: relative;
     width: 100%;
 }
@@ -837,22 +837,10 @@ header .logout-btn:hover {
     display: flex;
     justify-content: center;
     align-items: center;
-    height: 800px;
+    height: auto;
     background-color: transparent;
 }
 
-/* Контейнер формы */
-.container {
-    background: rgba(51, 51, 51, 0.2);
-    padding: 2rem 3rem;
-    border-radius: 12px;
-    width: 100%;
-    max-width: 500px;
-    color: #e0e0e0;
-    text-align: center;
-    box-sizing: border-box;
-    font-family: 'Manrope', sans-serif;
-}
 
 /* Заголовок */
 .section-title {
@@ -1207,7 +1195,6 @@ header .logout-btn:hover {
 
 textarea {
     width: 100%; /* Сделает поля ввода шириной 100% контейнера */
-    max-width: 400px; /* Ограничение ширины текстовых полей */
     margin: 0 0 5px 0;
 }
 
@@ -1366,4 +1353,124 @@ ul li {
 #edit-form textarea:focus {
     outline: none;
     border-color: #de6d38;
+}
+
+.container_r {
+    background: rgba(51, 51, 51, 0.2);
+    padding: 2rem 3rem;
+    border-radius: 12px;
+    width: 100%;
+    max-width: 500px;
+    color: #e0e0e0;
+    text-align: center;
+    box-sizing: border-box;
+    font-family: 'Manrope', sans-serif;
+}
+
+container-gallery {
+    background: rgba(51, 51, 51, 0.2);
+    padding: 2rem 3rem;
+    width: 100%;
+    max-width: 500px;
+    color: #e0e0e0;
+    text-align: center;
+    box-sizing: border-box;
+    font-family: 'Manrope', sans-serif;
+}
+
+.gallery-grid {
+    column-count: 4;
+    column-gap: 20px; /* горизонтальные отступы */
+    padding: 20px 0;
+}
+
+.gallery-item {
+    break-inside: avoid;
+    margin-bottom: 20px; /* вертикальные отступы */
+}
+
+.gallery-photo {
+    width: 100%;
+    height: auto;
+    display: block;
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+    border-radius: 8px;
+}
+
+.gallery-photo:hover {
+    transform: scale(1.05);
+    box-shadow: 0 4px 20px rgba(0, 0, 0, 0.2);
+}
+
+.review-grid {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 30px;
+}
+
+@media (max-width: 768px) {
+    .review-grid {
+        grid-template-columns: 1fr;
+    }
+}
+
+/* Карточка отзыва */
+.review-card {
+    background: rgba(51, 51, 51, 0.3);
+    border-radius: 16px;
+    padding: 24px;
+    box-shadow: 0 6px 20px rgba(0, 0, 0, 0.07);
+}
+
+.review-header {
+    display: flex;
+    align-items: center;
+    gap: 14px;
+    margin-bottom: 16px;
+}
+
+.review-avatar {
+    background: #de6d38;
+    color: white;
+    font-weight: bold;
+    border-radius: 50%;
+    width: 42px;
+    height: 42px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 18px;
+}
+
+.review-body p {
+    margin-bottom: 12px;
+}
+
+.stars {
+    font-size: 18px;
+}
+
+.star {
+    color: #ddd;
+}
+
+.star.filled {
+    color: #ffc107;
+}
+
+.review-footer {
+    font-size: 13px;
+    color: #999;
+    margin-top: 10px;
+}
+
+/* Закреплённая кнопка "Оставить отзыв" */
+.review-button-fixed {
+    text-align: center;
+    margin-top: 60px;
+}
+
+.review-button-fixed .req-btn {
+    padding: 12px 30px;
+    font-size: 16px;
 }

@@ -1,0 +1,20 @@
+{% extends 'photobooth/base.html' %}
+{% block title %}Галерея{% endblock %}
+
+{% block content %}
+<section class="request-section">
+    <div class="container-gallery">
+        <h1 class="section-title" style="text-align: center;">Галерея</h1>
+
+        <div class="gallery-grid">
+            {% for image in images %}
+                <div class="gallery-item">
+                    <img src="{{ image.image.url }}" alt="{{ image.caption }}" class="gallery-photo">
+                </div>
+            {% empty %}
+                <p style="text-align: center;">Пока нет загруженных фотографий.</p>
+            {% endfor %}
+        </div>
+    </div>
+</section>
+{% endblock %}

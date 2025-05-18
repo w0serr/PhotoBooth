@@ -35,6 +35,9 @@ class Request(models.Model):
     client = models.ForeignKey(Client, on_delete=models.CASCADE)
     description = models.TextField()
     pricing_package = models.ForeignKey(PricingPackage, on_delete=models.SET_NULL, null=True, blank=False)
+    contact_info = models.CharField(max_length=255, verbose_name="Контактные данные", blank=True)
+    event_date = models.DateField(verbose_name="Дата мероприятия", null=True, blank=True)
+    guest_count = models.PositiveIntegerField(verbose_name="Количество гостей", null=True, blank=True)
     created_at = models.DateTimeField(auto_now_add=True)
     status = models.CharField(
         max_length=20,
@@ -65,3 +68,25 @@ class ContactInfo(models.Model):
 
     def __str__(self):
         return f"Contact Info"
+
+class GalleryImage(models.Model):
+    image = models.ImageField(upload_to='gallery/')
+    caption = models.CharField(max_length=255, blank=True)
+    uploaded_at = models.DateTimeField(auto_now_add=True)
+
+    def __str__(self):
+        return self.caption or f"Фото {self.id}"
+
+from django.contrib.auth.models import User
+
+class Review(models.Model):
+    RATING_CHOICES = [(i, f'{i} звёзд') for i in range(1, 6)]
+
+    user = models.ForeignKey(User, on_delete=models.CASCADE)
+    request = models.ForeignKey(Request, on_delete=models.CASCADE)
+    text = models.TextField("Текст отзыва")
+    rating = models.IntegerField(choices=RATING_CHOICES, default=5)
+    created_at = models.DateTimeField(auto_now_add=True)
+
+    def __str__(self):
+        return f"Отзыв от {self.user.username} – {self.created_at.date()}"

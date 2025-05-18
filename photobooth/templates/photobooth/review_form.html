@@ -1,0 +1,26 @@
+{% extends 'photobooth/base.html' %}
+{% block title %}Оставить отзыв{% endblock %}
+
+{% block content %}
+<section class="request-section">
+  <div class="container">
+    <h1 class="section-title">Оставить отзыв</h1>
+
+    <form method="post" class="request-form">
+      {% csrf_token %}
+
+      <div class="form-group">
+        {{ form.rating.label_tag }}
+        {{ form.rating }}
+      </div>
+
+      <div class="form-group">
+        {{ form.text.label_tag }}
+        {{ form.text }}
+      </div>
+
+      <button type="submit" class="req-btn">Отправить отзыв</button>
+    </form>
+  </div>
+</section>
+{% endblock %}

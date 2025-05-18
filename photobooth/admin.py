@@ -4,6 +4,16 @@ from .models import *
 admin.site.register(PricingPackage)
 admin.site.register(ContactInfo)
 
+@admin.register(Review)
+class ReviewAdmin(admin.ModelAdmin):
+    list_display = ('user', 'request', 'created_at')
+    search_fields = ('user__username', 'text')
+    list_filter = ('created_at',)
+
+@admin.register(GalleryImage)
+class GalleryImageAdmin(admin.ModelAdmin):
+    list_display = ('__str__', 'uploaded_at')
+
 @admin.register(Client)
 class ClientAdmin(admin.ModelAdmin):
     list_display = ('user', 'phone', 'address')
