@@ -34,6 +34,13 @@
               {{ review.created_at|date:"d.m.Y H:i" }}
             </div>
           </div>
+
+          {% if user.is_superuser %}
+          <form method="POST" action="{% url 'delete_review' review.id %}" style="margin-top: 10px; text-align: right;">
+            {% csrf_token %}
+            <button type="submit" class="btn btn-danger">Удалить</button>
+          </form>
+          {% endif %}
         </div>
       {% empty %}
         <p style="text-align: center;">Пока нет отзывов.</p>

@@ -26,4 +26,7 @@ urlpatterns = [
     path('gallery/', views.GalleryView.as_view(), name='gallery'),
     path('reviews/', views.ReviewListView.as_view(), name='review_list'),
     path('reviews/add/', views.ReviewCreateView.as_view(), name='review_create'),
+    path('gallery/upload/', views.upload_image, name='upload_image'),
+    path('gallery/delete/<int:image_id>/', views.delete_image, name='delete_image'),
+    path('reviews/delete/<int:review_id>/', views.delete_review, name='delete_review'),
 ]

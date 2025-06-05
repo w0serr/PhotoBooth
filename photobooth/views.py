@@ -18,6 +18,10 @@ from .models import Review, Request
 from .forms import ReviewForm
 from django.contrib.auth.decorators import login_required
 from django.utils.decorators import method_decorator
+from django.views.decorators.http import require_http_methods
+from django.contrib.auth.decorators import user_passes_test
+from .forms import GalleryImageForm
+from django.views.decorators.http import require_POST
 
 TELEGRAM_TOKEN = '7657287697:AAGPEfe0cosV0LD5loz-2IOALxc0UcG1o_c'
 TELEGRAM_CHAT_ID = '755335572'
@@ -37,6 +41,43 @@ class ContactsView(TemplateView):
 class RegisterView(CreateView):
     template_name = 'photobooth/register.html'
     form_class = UserCreationForm
+
+
+
+@user_passes_test(lambda u: u.is_superuser)
+@require_POST
+def delete_review(request, review_id):
+    review = get_object_or_404(Review, id=review_id)
+    review.delete()
+    return redirect('review_list')
+
+@method_decorator(login_required, name='dispatch')
+class GalleryView(TemplateView):
+    template_name = 'photobooth/gallery.html'
+
+    def get_context_data(self, **kwargs):
+        context = super().get_context_data(**kwargs)
+        context['images'] = GalleryImage.objects.order_by('-uploaded_at')
+        if self.request.user.is_superuser:
+            context['gallery_form'] = GalleryImageForm()
+        return context
+
+@user_passes_test(lambda u: u.is_superuser)
+@require_http_methods(["POST"])
+def upload_image(request):
+    form = GalleryImageForm(request.POST, request.FILES)
+    if form.is_valid():
+        form.save()
+    else:
+        print("Форма с ошибками:", form.errors)
+    return redirect('gallery')
+
+@user_passes_test(lambda u: u.is_superuser)
+@require_http_methods(["POST"])
+def delete_image(request, image_id):
+    image = get_object_or_404(GalleryImage, id=image_id)
+    image.delete()
+    return redirect('gallery')
 
 def contacts_view(request):
     # Получаем контактную информацию

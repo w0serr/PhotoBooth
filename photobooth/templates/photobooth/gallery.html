@@ -4,12 +4,47 @@
 {% block content %}
 <section class="request-section">
     <div class="container-gallery">
-        <h1 class="section-title" style="text-align: center;">Галерея</h1>
+        <h1 class="section-title" style="text-align: center;">ГАЛЕРЕЯ</h1>
+
+        {% if user.is_superuser %}
+        <!-- Форма загрузки изображения -->
+        <div class="container" style="margin: 0 auto 40px auto; display: flex; justify-content: center;">
+            <div style="width: 100%; max-width: 500px;">
+                <form method="POST" action="{% url 'upload_image' %}" enctype="multipart/form-data" class="request-form">
+                    {% csrf_token %}
+
+                    <div class="form-group" style="text-align: center;">
+                        <label for="id_image" class="file-upload-label">
+                            <span class="file-upload-button">Выбрать фотографию</span>
+                            <input type="file" name="image" id="id_image" required hidden>
+                        </label>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="id_caption">Подпись (необязательно):</label>
+                        <input type="text" name="caption" id="id_caption">
+                    </div>
+
+                    <button type="submit" class="req-btn">Загрузить</button>
+                </form>
+            </div>
+        </div>
+        {% endif %}
 
         <div class="gallery-grid">
             {% for image in images %}
                 <div class="gallery-item">
                     <img src="{{ image.image.url }}" alt="{{ image.caption }}" class="gallery-photo">
+                    {% if image.caption %}
+                        <p style="text-align: center;">{{ image.caption }}</p>
+                    {% endif %}
+
+                    {% if user.is_superuser %}
+                    <form method="POST" action="{% url 'delete_image' image.id %}" style="margin-top: 10px; text-align: center;">
+                        {% csrf_token %}
+                        <button type="submit" class="btn btn-danger" style="margin: 0 auto; display: block;">Удалить</button>
+                    </form>
+                    {% endif %}
                 </div>
             {% empty %}
                 <p style="text-align: center;">Пока нет загруженных фотографий.</p>
