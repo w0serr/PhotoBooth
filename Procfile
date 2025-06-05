@@ -1,0 +1,1 @@
+web: gunicorn photobooth_project.wsgi --log-file -
